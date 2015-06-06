@@ -16,7 +16,6 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    console.log('call')
     xhr({
       url: this.props.apiUrl,
       method: 'GET',
@@ -27,22 +26,23 @@ module.exports = React.createClass({
       json: {
         date: this.formatDate(this.props.date)
       }
-    }, function(flights) {
+    }, function(err, request, flights) {
+      flights = flights.Flights.Flight.filter(function(f){
+            return f.ArrDep === 'D';
+           });
       console.log(flights);
-      // if (this.isMounted()) {
-      //   this.setState({
-      //     username: lastGist.owner.login,
-      //     lastGistUrl: lastGist.html_url
-      //   });
-      // }
+      if (this.isMounted()) {
+         this.setState({
+           flights: flights
+         });
+       }
     }.bind(this));
   },
 
   getDefaultProps: function () {
     return {
       date: new Date(),
-      apiKey: 'fe1390f6f4f59b9cac5ab08739e4b877',
-      apiUrl: 'https://api-2445581284910.apicast.io/schiphol/flights',
+      apiUrl: '/api/flights/'
     }
   },
 
