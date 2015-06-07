@@ -13,11 +13,15 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     var yesterday = new Date();
-    yesterday.setDate(yesterday.getDate()-1);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    var endDate = new Date();
+    endDate.setDate(endDate.getDate() + 3);
 
     return {
         defaultDate: new Date(),
-        minDate: yesterday
+        minDate: yesterday,
+        maxDate: endDate
     };
   },
 
@@ -35,11 +39,10 @@ module.exports = React.createClass({
 
   render: function() {
     return <div className='homePage pageContent'>
-      <h1>Select date</h1>
-      <DatePicker hintText="Portrait Dialog"
+      <DatePicker hintText="Select date"
         ref='_datePicker'
         minDate={ this.props.minDate }
-        defaultDate={ this.props.defaultDate }
+        maxDate={ this.props.maxDate }
         formatDate={ this._formatDate }
         autoOk={ true }
         onChange={ this._handleDateSelect } />
@@ -47,7 +50,7 @@ module.exports = React.createClass({
   },
 
   _handleDateSelect: function (date) {
-    this.transitionTo('/flight', this.refs._datePicker.getDate());
+    this.transitionTo('/flight', {date: this.refs._datePicker.getDate() });
   }
 
 });

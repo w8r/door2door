@@ -15,6 +15,8 @@ module.exports = (
   <Route name='app' path='/' handler={require('./components/App')}>
     <Route name='about' handler={require('./components/About')} />
     <Route name='flight' handler={require('./components/Flight')} />
-    <DefaultRoute handler={require('./components/Home')} />
+    <Route name='route' handler={require('./components/Route')} />
+    <Route name='flight-info' handler={require('./components/FlightInfo')} />
+    <DefaultRoute handler={require('./components/Flight')} />
   </Route>
 );

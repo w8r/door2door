@@ -1,0 +1,20 @@
+.flight {
+    text-align: left;
+
+    span {
+        margin-right: 10px;
+    }
+
+    .flight-number {
+        color: #aaaaaa;
+    }
+
+    .flight-destination {
+        font-weight: bold;
+    }
+
+    .flight-time {
+        float: right;
+        margin-left: 100px;
+    }
+}
